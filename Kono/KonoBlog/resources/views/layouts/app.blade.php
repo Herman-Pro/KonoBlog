@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="fr">
 
-@include('partials.head')
+@include('layouts.head')
 
 <body>
-  @include('partials.header')
+  @include('layouts.header')
 
   <main>
     @yield('content')
   </main>
 
-  @include('partials.footer')
+  @include('layouts.footer')
 </body>
 
 </html>

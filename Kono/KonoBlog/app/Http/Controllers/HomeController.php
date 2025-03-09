@@ -26,7 +26,7 @@ class HomeController extends Controller
         return view('contact');
     }
     
-    public function categoriesNewsChoisen()
+    public function categoriesNewsChosen()
     {
         return view('categories-news-choisen');
     }
