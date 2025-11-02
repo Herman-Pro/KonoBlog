@@ -18,20 +18,27 @@
         <nav class="nav-container">
             <div class="nav-link-container">
                 <img src="img/logo-removebg-preview.png" alt="logo_de_KonoBlog">
-                <ul>
-                    <li><a href="index.html" title="Accueil" class="nav-link">Accueil</a></li>
+
+                <ul class="nav-links">
+                    <li><a href="index.html" title="Accueil" class="active">Accueil</a></li>
                     <li><a href="categorie.html" title="Catégorie" class="nav-link">Catégorie</a></li>
                     <li><a href="about_us.html" title="À propos" class="nav-link">À propos</a></li>
                     <li><a href="contact.html" title="Contact" class="nav-link">Contact</a></li>
                 </ul>
             </div>
+
             <div class="nav-search-container">
                 <div class="search-container">
-                    <input type="search">
-                    <button type="submit"><i class="fi fi-rr-search icon"></i>
-                    </button>
+                    <input type="search" placeholder="Rechercher...">
+                    <button type="submit"><i class="fi fi-rr-search icon"></i></button>
                 </div>
                 <i class="fi fi-brands-telegram icon-telegram"></i>
+
+                <!-- Bouton hamburger -->
+                <button class="menu-toggle" aria-label="Menu">
+                    <i class="fi fi-rr-menu-burger"></i>
+                </button>
+
             </div>
         </nav>
     </header>
@@ -200,6 +207,15 @@
             <p>&copy; 2024 KonoBlog. All rights reserved.</p>
         </div>
     </footer>
+
+    <script>
+        const toggle = document.querySelector(".menu-toggle");
+        const navLinks = document.querySelector(".nav-links");
+
+        toggle.addEventListener("click", () => {
+            navLinks.classList.toggle("active");
+        });
+    </script>
 </body>
 
 </html>

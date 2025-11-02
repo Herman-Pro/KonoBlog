@@ -2,6 +2,11 @@
 @import url("https://cdn-uicons.flaticon.com/2.6.0/uicons-regular-straight/css/uicons-regular-straight.css");
 @import url("https://cdn-uicons.flaticon.com/2.6.0/uicons-solid-straight/css/uicons-solid-straight.css");
 
+html,
+body {
+  overflow-x: hidden;
+}
+
 body {
   padding: 0;
   margin: 0;
@@ -16,109 +21,94 @@ p {
 }
 
 /* // header */
-/* //Navbar */
+/* ===========================
+   NAVIGATION PRINCIPALE
+=========================== */
 .nav-container {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   background-color: rgba(0, 0, 0, 0.308);
+  padding: 0.4em 1em;
+  position: relative;
 }
 
+/* Logo + liens */
 .nav-link-container {
-  margin-top: 1em;
-  margin-bottom: 1em;
-  padding-left: 0.5em;
-  padding-right: 0.5em;
+  display: flex;
+  align-items: center;
 }
 
-/* //Logo KONOBLOG */
+/* Logo */
 .nav-link-container img {
   max-width: 10em;
   height: 4em;
   margin-right: 1em;
-  margin-left: 1em;
 }
 
-.nav-link-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-/* //links */
-.nav-link-container ul {
+/* Liens de navigation */
+.nav-links {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
-.nav-link-container li {
-  display: inline;
+.nav-links li {
+  display: inline-block;
 }
 
-.nav-link {
-  text-decoration: none;
-  padding: 12px;
-  margin-left: 8px;
-  margin-left: 8px;
-  color: white;
-  font-size: 13px;
-  font-weight: 600;
-  text-transform: uppercase;
-  line-height: 1.6em;
-  transition: all 0.5s;
-}
-
-.nav-link-container a:hover {
-  color: rgb(0, 183, 255);
-  border-bottom: solid 1px rgb(0, 183, 255);
-}
-
-/* //active link */
+.nav-link,
 .active {
   text-decoration: none;
   padding: 12px;
   margin-left: 8px;
-  margin-left: 8px;
-  color: rgb(0, 183, 255);
-  border-bottom: solid 1px rgb(0, 183, 255);
+  color: white;
   font-size: 13px;
   font-weight: 600;
   text-transform: uppercase;
-  line-height: 1.6em;
   transition: all 0.5s;
 }
 
-/* //search barre */
+.nav-link:hover {
+  color: rgb(0, 183, 255);
+  border-bottom: 1px solid rgb(0, 183, 255);
+}
+
+.active {
+  color: rgb(0, 183, 255);
+  border-bottom: 1px solid rgb(0, 183, 255);
+}
+
+/* Barre de recherche + icônes */
 .nav-search-container {
   display: flex;
   align-items: center;
+  gap: 1em;
 }
 
-.search-container button {
+.search-container input {
+  padding: 0.4em 0.6em;
+  border-radius: 5px;
   border: none;
-  box-shadow: none;
-  padding-top: 2px;
-  padding-bottom: 2px;
-  padding-left: 3, 5px;
-  padding-right: 3, 5px;
-  background-color: transparent;
+  outline: none;
+}
+
+/* Icônes */
+.icon,
+.icon-telegram {
+  color: white;
+  font-size: 1.4em;
   cursor: pointer;
 }
 
-.search-container button:hover {
-  background-color: rgba(209, 207, 207, 0.562);
-  border-radius: 5px;
-}
-
-/* //social icon */
-.icon {
+/* Bouton hamburger (caché par défaut sur PC) */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
   color: white;
-  font-size: 1.2em;
-}
-
-.icon-telegram {
-  font-size: 1.6em;
-  color: white;
-  padding: 0.5em;
+  font-size: 1.8em;
+  cursor: pointer;
 }
 
 .banniere {
@@ -462,14 +452,25 @@ footer {
 
 .suggest-categorie-container {
   display: flex;
+  gap: 0.2em; /* espace entre les éléments, plus moderne que margin */
   margin-top: 3em;
   margin-bottom: 3em;
+  overflow-x: auto; /* permet le scroll horizontal */
+  scroll-snap-type: x mandatory; /* effet d'accrochage fluide (optionnel) */
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
 }
 
-.suggest-categorie-container > .suggest {
-  width: 20%;
-  margin-right: 1.6em;
-  margin-left: 1.6em;
+/* Cache la scrollbar sur certains navigateurs pour un rendu propre */
+/* .suggest-categorie-container::-webkit-scrollbar {
+  display: none;
+} */
+
+/* Les éléments enfants */
+.suggest-categorie-container > .suggest-categorie {
+  flex: 0 0 160px; /* largeur fixe pour chaque élément */
+  scroll-snap-align: start; /* accroche fluide (optionnel) */
+  padding: 1em;
 }
 
 .suggest-container {
@@ -594,5 +595,44 @@ footer {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
     gap: 2em;
+  }
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+@media (max-width: 900px) {
+  /* Le bouton hamburger apparaît */
+  .menu-toggle {
+    display: block;
+  }
+
+  /* Masquer les liens par défaut */
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: -8px;
+    width: 100%;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.9);
+    padding: 1em 0;
+    text-align: center;
+    z-index: 1000;
+  }
+
+  .nav-links li {
+    display: block;
+    margin: 1em 0;
+  }
+
+  /* Quand le menu est actif */
+  .nav-links.active {
+    display: flex;
+  }
+
+  /* Ajuster la barre de recherche */
+  .nav-search-container {
+    display: none; /*facultatif si tu veux la cacher sur mobile */
   }
 }
